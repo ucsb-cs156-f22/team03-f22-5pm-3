@@ -1,7 +1,6 @@
 import OurTable from "main/components/OurTable";
-import { hasRole } from "main/utils/currentUser";
 
-export default function ArticlesTable({ articles, currentUser }) {
+export default function ArticlesTable({ articles, _currentUser }) {
 
     const columns = [
         {
