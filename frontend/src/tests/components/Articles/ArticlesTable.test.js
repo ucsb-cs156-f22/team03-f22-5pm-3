@@ -86,9 +86,5 @@ describe("ArticlesTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
     expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("Midterm Elections");
     expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("Best meals from Portola");
-
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-    expect(deleteButton).toHaveClass("btn-danger");
   });
 });
