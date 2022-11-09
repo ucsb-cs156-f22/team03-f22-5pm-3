@@ -10,7 +10,7 @@ import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 
 describe("ArticlesIndexPage tests", () => {
 
-    const axiosMock =new AxiosMockAdapter(axios);
+    const axiosMock = new AxiosMockAdapter(axios);
     axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
     axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
 
