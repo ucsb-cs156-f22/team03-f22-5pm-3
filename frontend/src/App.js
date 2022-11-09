@@ -20,7 +20,7 @@ import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
-import OrganizationIndexPage from "main/pages/Organizations/OrganizationIndexPage";
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
 
 
 function App() {
@@ -77,7 +77,7 @@ function App() {
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
-              <Route exact path="/organization/list" element={<OrganizationIndexPage />} />
+              <Route exact path="/ucsborganization/list" element={<UCSBOrganizationIndexPage />} />
             </>
           )
         }

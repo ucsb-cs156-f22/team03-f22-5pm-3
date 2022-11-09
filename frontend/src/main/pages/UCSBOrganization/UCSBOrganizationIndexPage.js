@@ -4,7 +4,7 @@ export default function UCSBOrganizationIndexPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Articles</h1>
+        <h1>UCSBOrganization</h1>
         <p>
           This is where the index page will go
         </p>
