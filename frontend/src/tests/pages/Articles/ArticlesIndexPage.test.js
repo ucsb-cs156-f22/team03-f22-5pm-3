@@ -31,7 +31,6 @@ jest.mock('react-router-dom', () => ({
 describe("ArticlesIndexPage tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
-
     const testId = "ArticlesTable";
 
     const setupUserOnly = () => {
@@ -52,7 +51,6 @@ describe("ArticlesIndexPage tests", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/article/all").reply(200, []);
-
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -60,8 +58,6 @@ describe("ArticlesIndexPage tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-
-
     });
 
     test("renders without crashing for admin user", () => {
