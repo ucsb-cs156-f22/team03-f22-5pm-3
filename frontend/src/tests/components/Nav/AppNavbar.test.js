@@ -99,7 +99,14 @@ describe("AppNavbar tests", () => {
         );
 
         await waitFor(() => expect(getByTestId("appnavbar-recommendations-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-recommendations-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId(/appnavbar-recommendations-list/)).toBeInTheDocument() );
     });
+
+    
 
     test("renders the AppNavbarLocalhost when on http://localhost:3000", async () => {
 
