@@ -173,13 +173,5 @@ describe("ArticlesIndexPage tests", () => {
 
         expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
         expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-
-
-        const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-        expect(deleteButton).toBeInTheDocument();
-        
-        fireEvent.click(deleteButton);
-        
-        await waitFor(() => { expect(mockToast).toBeCalledWith("Articles with id 1 was deleted") });
     });
 });
