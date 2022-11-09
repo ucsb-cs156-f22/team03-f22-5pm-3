@@ -32,15 +32,9 @@ export default function ArticlesTable({ articles, currentUser }) {
 
     const testid = "ArticlesTable";
 
-    const columnsIfAdmin = [
-        ...columns
-    ];
-
-    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
-
     return <OurTable
         data={articles}
-        columns={columnsToDisplay}
+        columns={columns}
         testid={testid}
     />;
 };
