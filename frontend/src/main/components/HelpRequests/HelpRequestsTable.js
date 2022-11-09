@@ -1,11 +1,11 @@
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 import { hasRole } from "main/utils/currentUser";
 
-export default function HelpRequestsTable({ helprequests, currentUser }) {
+export default function HelpRequestsTable({ helpRequests, currentUser }) {
 
     const columns = [
         {
-            Header: 'id',
+            Header: 'Id',
             accessor: 'id', // accessor is the "key" in the data
         },
         {
@@ -29,7 +29,7 @@ export default function HelpRequestsTable({ helprequests, currentUser }) {
             accessor: 'explanation',
         },
         {
-            Header: 'Solved',
+            Header: 'Solved?',
             accessor: 'solved',
         }
     ];
@@ -43,7 +43,7 @@ export default function HelpRequestsTable({ helprequests, currentUser }) {
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
     return <OurTable
-        data={helprequests}
+        data={helpRequests}
         columns={columnsToDisplay}
         testid={"HelpRequestsTable"}
     />;
