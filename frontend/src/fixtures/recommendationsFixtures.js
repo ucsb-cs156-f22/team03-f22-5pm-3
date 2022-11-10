@@ -1,5 +1,5 @@
-const diningCommonsFixtures = {
-    oneDiningCommons: {
+const recommendationsFixtures = {
+    oneRecommendation: {
         "id": 1,
         "requesterEmail": "Student_A",
         "preofessorEmail": "Professor_A",
@@ -8,7 +8,7 @@ const diningCommonsFixtures = {
         "dateNeeded": "2001-10-31T01:30:00",
         "done": false,
     },
-    threeCommons: [
+    threeRecommendations: [
         {
             "id": 1,
             "requesterEmail": "Student_B",
@@ -40,4 +40,4 @@ const diningCommonsFixtures = {
 };
 
 
-export { diningCommonsFixtures };
+export { recommendationsFixtures };

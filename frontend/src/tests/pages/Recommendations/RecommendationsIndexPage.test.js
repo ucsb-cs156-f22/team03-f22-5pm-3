@@ -84,7 +84,7 @@ describe("RecommendationsIndexPage tests", () => {
     test("renders three recommendations without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeCommons);
+        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeRecommendations);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -103,7 +103,7 @@ describe("RecommendationsIndexPage tests", () => {
     test("renders three recommendations without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeCommons);
+        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeRecommendations);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
