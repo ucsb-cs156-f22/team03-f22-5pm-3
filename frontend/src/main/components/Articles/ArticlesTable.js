@@ -53,11 +53,11 @@ export default function ArticlesTable({ articles, currentUser }) {
         }
     ];
 
-    const testid = "ArticlesTable";
+    const testId = "ArticlesTable";
 
     const columnsIfAdmin = [
         ...columns,
-        ButtonColumn("Delete", "danger", deleteCallback, testid)
+        ButtonColumn("Delete", "danger", deleteCallback, testId)
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
@@ -65,6 +65,6 @@ export default function ArticlesTable({ articles, currentUser }) {
     return <OurTable
         data={articles}
         columns={columnsToDisplay}
-        testid={testid}
+        testid={testId}
     />;
 };
