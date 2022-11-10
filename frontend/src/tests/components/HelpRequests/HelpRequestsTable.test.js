@@ -87,7 +87,7 @@ describe("HelpRequestsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
     expect(getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("Need help with lab03");
     expect(getByTestId(`${testId}-cell-row-1-col-teamId`)).toHaveTextContent("14");
-    expect(getByTestId(`${testId}-cell-row-1-col-sovled`)).toHaveTextContent("true");
+    expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("true");
 
     // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     // expect(editButton).toBeInTheDocument();
