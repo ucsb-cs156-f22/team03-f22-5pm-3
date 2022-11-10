@@ -22,7 +22,7 @@ describe("MenuItemIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    const testId = "MenuItemTable";
+    const _testId = "MenuItemTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
