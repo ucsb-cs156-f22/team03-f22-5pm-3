@@ -4,10 +4,6 @@ export default function UCSBOrganizationTable({ dates, currentUser }) {
 
     const columns = [
         {
-            Header: 'id',
-            accessor: 'id', // accessor is the "key" in the data
-        },
-        {
             Header: 'UCSB Organization Code',
             accessor: 'orgCode',
         },
