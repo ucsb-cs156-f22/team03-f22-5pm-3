@@ -21,7 +21,7 @@ Empty.args = {
     articles: []
 };
 
-export const threeUCSBOrganization = Template.bind({});
+export const ThreeUCSBOrganization = Template.bind({});
 
 ThreeUCSBOrganization.args = {
     ucsbOrganization: ucsbOrganizationFixtures.threeUCSBOrganization

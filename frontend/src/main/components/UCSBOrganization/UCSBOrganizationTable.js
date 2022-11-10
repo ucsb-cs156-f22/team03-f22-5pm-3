@@ -1,6 +1,6 @@
 import OurTable from "main/components/OurTable";
 
-export default function UCSBOrganizationTable({ dates, currentUser }) {
+export default function UCSBOrganizationTable({ dates, _currentUser }) {
 
     const columns = [
         {
@@ -23,7 +23,7 @@ export default function UCSBOrganizationTable({ dates, currentUser }) {
 
     return <OurTable
         data={dates}
-        columns={columnsToDisplay}
+        columns={columns}
         testid={"UCSBOrganizationTable"}
     />;
 };
