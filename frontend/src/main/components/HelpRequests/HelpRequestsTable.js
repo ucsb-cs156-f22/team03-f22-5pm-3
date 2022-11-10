@@ -1,4 +1,4 @@
-import OurTable, { ButtonColumn } from "main/components/OurTable";
+import OurTable from "main/components/OurTable";
 import { hasRole } from "main/utils/currentUser";
 
 export default function HelpRequestsTable({ helpRequests, currentUser }) {
@@ -30,17 +30,18 @@ export default function HelpRequestsTable({ helpRequests, currentUser }) {
         },
         {
             Header: 'Solved?',
-            accessor: 'solved',
+            id: 'solved',
+            accessor: (row, _rowIndex) => String(row.solved)
         }
     ];
 
-    const columnsIfAdmin = [
-        ...columns,
-        // ButtonColumn("Edit", "primary", editCallback, "HelpRequestsTable"),
-        // ButtonColumn("Delete", "danger", deleteCallback, "HelpRequestsTable")
-    ];
+    // const columnsIfAdmin = [
+    //     ...columns,
+    //     // ButtonColumn("Edit", "primary", editCallback, "HelpRequestsTable"),
+    //     // ButtonColumn("Delete", "danger", deleteCallback, "HelpRequestsTable")
+    // ];
 
-    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
+    // const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
     return <OurTable
         data={helpRequests}

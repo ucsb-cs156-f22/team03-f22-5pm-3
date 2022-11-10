@@ -1,5 +1,5 @@
 const helpRequestsFixtures = {
-    oneDate: {
+    oneHelpRequest: {
         "id": 1,
         "requesterEmail": "cgaucho@ucsb.edu",
         "teamId": "7",
@@ -8,7 +8,7 @@ const helpRequestsFixtures = {
         "explanation": "Need help with lab03",
         "solved": false,
     },
-    threeDates: [
+    threeHelpRequests: [
         {
             "id": 1,
             "requesterEmail": "cgaucho@ucsb.edu",
