@@ -1,5 +1,6 @@
 const diningCommonsFixtures = {
     oneDiningCommons: {
+        "id": 1,
         "requesterEmail": "Student_A",
         "preofessorEmail": "Professor_A",
         "explanation": "Grad School A",
@@ -9,6 +10,7 @@ const diningCommonsFixtures = {
     },
     threeCommons: [
         {
+            "id": 1,
             "requesterEmail": "Student_B",
             "preofessorEmail": "Professor_B",
             "explanation": "Grad School B",
@@ -17,6 +19,7 @@ const diningCommonsFixtures = {
             "done": false,
         },
         {
+            "id": 2,
             "requesterEmail": "Student_C",
             "preofessorEmail": "Professor_C",
             "explanation": "Grad School C",
@@ -25,6 +28,7 @@ const diningCommonsFixtures = {
             "done": false,
         },
         {
+            "id": 3,
             "requesterEmail": "Student_D",
             "preofessorEmail": "Professor_D",
             "explanation": "Grad School D",
