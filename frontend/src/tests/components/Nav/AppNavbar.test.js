@@ -237,13 +237,14 @@ describe("AppNavbar tests", () => {
 
     });
 
-    test("renders the helprequests menu correctly for a user", async () => {
+
+
+    test("renders the reviews menu correctly for a user", async () => {
 
         const currentUser = currentUserFixtures.userOnly;
         const systemInfo = systemInfoFixtures.showingBoth;
-    
+
         const doLogin = jest.fn();
-    
         const {getByTestId  } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -251,7 +252,31 @@ describe("AppNavbar tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
+
+
+        await waitFor(() => expect(getByTestId("appnavbar-reviews-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-reviews-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId("appnavbar-reviews-list")).toBeInTheDocument() );
+
+    });
+
+        
+    test("renders the helprequests menu correctly for a user", async () => {
+
+        const currentUser = currentUserFixtures.userOnly;
+        const systemInfo = systemInfoFixtures.showingBoth;
     
+        const doLogin = jest.fn();
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
         await waitFor(() => expect(getByTestId("appnavbar-helprequests-dropdown")).toBeInTheDocument());
         const dropdown = getByTestId("appnavbar-helprequests-dropdown");
         const aElement = dropdown.querySelector("a");
@@ -261,7 +286,7 @@ describe("AppNavbar tests", () => {
     
     });
     
-    
+
    
     test("renders the articles menu correctly for a user", async () => {
 
@@ -284,6 +309,52 @@ describe("AppNavbar tests", () => {
         expect(aElement).toBeInTheDocument();
         aElement?.click();
         await waitFor( () => expect(getByTestId("appnavbar-articles-list")).toBeInTheDocument() );
+    });
+
+    test("renders the ucsborganization menu correctly for a user", async () => {
+
+        const currentUser = currentUserFixtures.userOnly;
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByTestId("appnavbar-ucsborganization-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-ucsborganization-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId("appnavbar-ucsborganization-list")).toBeInTheDocument() );
+
+    });
+
+    test("renders the ucsborganization menu correctly for an admin", async () => {
+
+        const currentUser = currentUserFixtures.adminUser;
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByTestId("appnavbar-ucsborganization-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-ucsborganization-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
     });
 });
 
