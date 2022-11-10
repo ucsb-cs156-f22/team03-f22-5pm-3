@@ -1,7 +1,7 @@
 import OurTable from "main/components/OurTable";
-import { hasRole } from "main/utils/currentUser";
 
-export default function HelpRequestsTable({ helpRequests, currentUser }) {
+
+export default function HelpRequestsTable({ helpRequests, _currentUser }) {
 
     const columns = [
         {
