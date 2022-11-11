@@ -139,7 +139,7 @@ describe("UCSBOrganizationIndexPage tests", () => {
 
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/UCSBOrganization/all").reply(200, ucsbOrganizationFixtures.threeUCSBOrganization);
-        axiosMock.onDelete("/api/UCSBOrganization", { params : { orgCode : "POINT" } }).reply(200, "UCSBOrganization with orgCode POINT was deleted");
+        axiosMock.onDelete("/api/UCSBOrganization", { params : { id : "POINT" } }).reply(200, "UCSBOrganization with orgCode POINT was deleted");
 
 
         const { getByTestId } = render(
