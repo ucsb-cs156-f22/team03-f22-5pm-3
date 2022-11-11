@@ -18,19 +18,19 @@ const Template = (args) => {
 export const Empty = Template.bind({});
 
 Empty.args = {
-    menuItem: []
+    menuItems: []
 };
 
 export const ThreeMenuItems = Template.bind({});
 
 ThreeMenuItems.args = {
-    menuItem: menuItemFixtures.threeMenuItems
+    menuItems: menuItemFixtures.threeMenuItems
 };
 
 export const ThreeMenuItemsAsAdmin = Template.bind({});
 
 ThreeMenuItemsAsAdmin.args = {
-    menuItem: menuItemFixtures.threeMenuItems,
+    menuItems: menuItemFixtures.threeMenuItems,
     currentUser: currentUserFixtures.adminUser
 };
 
