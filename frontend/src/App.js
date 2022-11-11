@@ -17,7 +17,11 @@ import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 
 
+
 import RecommendationsIndexPage from "main/pages/Recommendations/RecommendationsIndexPage";
+
+import MenuItemIndexPage from "main/pages/MenuItem/MenuItemIndexPage";
+
 
 import HelpRequestsIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage";
 
@@ -25,6 +29,8 @@ import HelpRequestsIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
+import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 
 
 function App() {
@@ -85,6 +91,20 @@ function App() {
             </>
           )
         }
+		    {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/ucsbdiningcommonsmenuitem/list" element={<MenuItemIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/articles/list" element={<ArticlesIndexPage />} />
+            </>
+          )
+        }
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
@@ -92,7 +112,13 @@ function App() {
             </>
           )
         }
-
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/ucsborganization/list" element={<UCSBOrganizationIndexPage />} />
+            </>
+          )
+        }
       </Routes>
     </BrowserRouter>
   );
