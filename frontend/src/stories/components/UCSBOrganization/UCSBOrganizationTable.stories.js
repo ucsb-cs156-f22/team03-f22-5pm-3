@@ -18,18 +18,18 @@ const Template = (args) => {
 export const Empty = Template.bind({});
 
 Empty.args = {
-    articles: []
+    ucsborganization: []
 };
 
 export const ThreeUCSBOrganization = Template.bind({});
 
 ThreeUCSBOrganization.args = {
-    ucsbOrganization: ucsbOrganizationFixtures.threeUCSBOrganization
+    ucsborganization: ucsbOrganizationFixtures.threeUCSBOrganization
 };
 
 export const ThreeUCSBOrganizationAsAdmin = Template.bind({});
 
 ThreeUCSBOrganizationAsAdmin.args = {
-    ucsbOrganization: ucsbOrganizationFixtures.threeUCSBOrganization,
+    ucsborganization: ucsbOrganizationFixtures.threeUCSBOrganization,
     currentUser: currentUserFixtures.adminUser
 };
