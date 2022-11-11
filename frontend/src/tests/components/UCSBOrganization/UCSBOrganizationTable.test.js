@@ -1,4 +1,4 @@
-import {  render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 import UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -23,7 +23,7 @@ describe("UCSBOrganizationTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable articles={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -82,9 +82,9 @@ describe("UCSBOrganizationTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("POINT");
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("CRANE");
-    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("Physics Innovation Technology");
-    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("College Rage");
+    expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("POINT");
+    expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("CRANE");
+    expect(getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Physics Innovation Technology");
+    expect(getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("College Rage");
   });
 });
