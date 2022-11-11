@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import RecommendationsIndexPage from "main/pages/Recommendations/RecommendationsIndexPage";
@@ -84,7 +84,7 @@ describe("RecommendationsIndexPage tests", () => {
     test("renders three recommendations without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeCommons);
+        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeRecommendations);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -94,16 +94,16 @@ describe("RecommendationsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("Student_B"); } );
-        expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("Student_C");
-        expect(getByTestId(`${testId}-cell-row-2-col-requesterEmail`)).toHaveTextContent("Student_D");
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); } );
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
     });
 
     test("renders three recommendations without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeCommons);
+        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeRecommendations);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -113,9 +113,9 @@ describe("RecommendationsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("Student_B"); } );
-        expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("Student_C");
-        expect(getByTestId(`${testId}-cell-row-2-col-requesterEmail`)).toHaveTextContent("Student_D");
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); } );
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
     });
 
@@ -142,7 +142,7 @@ describe("RecommendationsIndexPage tests", () => {
           expect(header).toBeInTheDocument();
         });
 
-        expect(queryByTestId(`${testId}-cell-row-0-col-requesterEmail`)).not.toBeInTheDocument();
+        expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
     });
 
 });

@@ -40,7 +40,7 @@ export default function RecommendationsTable({ recommendations }) {
         }
     ];
 
-    const testid = "DiningCommonsTable";
+    const testid = "RecommendationsTable";
 
     const columnsToDisplay = columns;
 

@@ -62,7 +62,7 @@ describe("RecommendationsTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationsTable recommendations={recommendationsFixtures.threeCommons} currentUser={currentUser} />
+          <RecommendationsTable recommendations={recommendationsFixtures.threeRecommendations} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -83,10 +83,9 @@ describe("RecommendationsTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("Student_B");
-    expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("Student_C");
-    expect(getByTestId(`${testId}-cell-row-0-col-preofessorEmail`)).toHaveTextContent("Professor_B");
-    expect(getByTestId(`${testId}-cell-row-1-col-preofessorEmail`)).toHaveTextContent("Professor_C");
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    
 
     // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     // expect(editButton).toBeInTheDocument();

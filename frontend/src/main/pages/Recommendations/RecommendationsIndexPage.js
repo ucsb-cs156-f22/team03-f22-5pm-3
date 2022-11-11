@@ -21,7 +21,7 @@ export default function RecommendationsIndexPage() {
     return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Recommendations Index Page Placeholder</h1>
+        <h1>Recommendations Index Page</h1>
         <RecommendationsTable recommendations={recommendations} currentUser={currentUser} />
       </div>
     </BasicLayout>
