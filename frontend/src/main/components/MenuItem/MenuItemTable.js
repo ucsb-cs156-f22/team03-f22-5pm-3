@@ -1,4 +1,4 @@
-import OurTable, { ButtonColumn } from "main/components/OurTable";
+import OurTable from "main/components/OurTable";
 
 export default function MenuItemTable({ menuItems, _currentUser }) {
 
@@ -29,12 +29,3 @@ export default function MenuItemTable({ menuItems, _currentUser }) {
         testid={testid}
     />;
 };
-
-/*@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private long id;
-
-private String diningCommonsCode;
-private String name;
-private String station;*/
-
