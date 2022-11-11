@@ -106,8 +106,6 @@ describe("AppNavbar tests", () => {
         await waitFor( () => expect(getByTestId(/appnavbar-recommendations-list/)).toBeInTheDocument() );
     });
 
-    
-
     test("renders the AppNavbarLocalhost when on http://localhost:3000", async () => {
 
         const currentUser = currentUserFixtures.userOnly;
