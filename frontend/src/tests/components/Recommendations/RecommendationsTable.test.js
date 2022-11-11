@@ -71,7 +71,7 @@ describe("RecommendationsTable tests", () => {
 
     const expectedHeaders = ['ID',  'Requester Email', 'Professor Email','Explanation','Date Requested','Date Needed','Done?'];
     const expectedFields = ['id', 'requesterEmail','professorEmail', 'explanation','dateRequested','dateNeeded','done'];
-    const testId = "RecommendationTable";
+    const testId = "RecommendationsTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -87,13 +87,10 @@ describe("RecommendationsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
     
 
-    // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    // expect(editButton).toBeInTheDocument();
-    // expect(editButton).toHaveClass("btn-primary");
-
-    // const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    // expect(deleteButton).toBeInTheDocument();
-    // expect(deleteButton).toHaveClass("btn-danger");
+    
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
 
   });
 
