@@ -7,21 +7,21 @@ import { useCurrentUser } from 'main/utils/currentUser' // use prefix indicates 
 
 export default function RecommendationsIndexPage() {
 
-    const currentUser = useCurrentUser();
+  const currentUser = useCurrentUser();
 
-    const { data: recommendations, error: _error, status: _status } =
-      useBackend(
-        // Stryker disable next-line all : don't test internal caching of React Query
-        ["/api/recommendations/all"],
-              // Stryker disable next-line StringLiteral,ObjectLiteral : since "GET" is default, "" is an equivalent mutation
-              { method: "GET", url: "/api/recommendations/all" },
-        []
-      );
-  
-    return (
+  const { data: recommendations, error: _error, status: _status } =
+    useBackend(
+      // Stryker disable next-line all : don't test internal caching of React Query
+      ["/api/recommendations/all"],
+            // Stryker disable next-line StringLiteral,ObjectLiteral : since "GET" is default, "" is an equivalent mutation
+            { method: "GET", url: "/api/recommendations/all" },
+      []
+    );
+
+  return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Recommendations Index Page</h1>
+        <h1>Recommendations</h1>
         <RecommendationsTable recommendations={recommendations} currentUser={currentUser} />
       </div>
     </BasicLayout>
