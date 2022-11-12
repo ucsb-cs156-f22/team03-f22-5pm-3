@@ -55,6 +55,13 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
+              {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="Recommendations" id="appnavbar-recommendations-dropdown" data-testid="appnavbar-recommendations-dropdown" >
+                    <NavDropdown.Item as={Link} to="/recommendations/list" data-testid="appnavbar-recommendations-list">List</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
                {
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Dining Commons" id="appnavbar-dining-commons-dropdown" data-testid="appnavbar-dining-commons-dropdown" >
@@ -82,7 +89,14 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
-              {
+			  {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="Menu Item" id="appnavbar-ucsbdiningcommonsmenuitem-dropdown" data-testid="appnavbar-ucsbdiningcommonsmenuitem-dropdown" >
+                    <NavDropdown.Item as={Link} to="/ucsbdiningcommonsmenuitem/list" data-testid="appnavbar-ucsbdiningcommonsmenuitem-list">List</NavDropdown.Item>
+				  </NavDropdown>
+				)
+			  }
+			  {
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Articles" id="appnavbar-articles-dropdown" data-testid="appnavbar-articles-dropdown" >
                     <NavDropdown.Item as={Link} to="/articles/list" data-testid="appnavbar-articles-list">List Articles</NavDropdown.Item>
@@ -93,7 +107,13 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="HelpRequests" id="appnavbar-helprequests-dropdown" data-testid="appnavbar-helprequests-dropdown" >
                     <NavDropdown.Item as={Link} to="/helprequests/list" data-testid="appnavbar-helprequests-list">List HelpRequests</NavDropdown.Item>
-
+                  </NavDropdown>
+                )
+              }
+              {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="UCSBOrganization" id="appnavbar-ucsborganization-dropdown" data-testid="appnavbar-ucsborganization-dropdown" >
+                    <NavDropdown.Item as={Link} to="/ucsborganization/list" data-testid="appnavbar-ucsborganization-list">List UCSBOrganizations</NavDropdown.Item>
                   </NavDropdown>
                 )
               }
