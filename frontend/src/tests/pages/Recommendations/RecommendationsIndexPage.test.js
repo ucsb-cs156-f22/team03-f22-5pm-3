@@ -52,7 +52,7 @@ describe("RecommendationsIndexPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, []);
+        axiosMock.onGet("/api/Recommendation/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -68,7 +68,7 @@ describe("RecommendationsIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, []);
+        axiosMock.onGet("/api/Recommendation/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -84,7 +84,7 @@ describe("RecommendationsIndexPage tests", () => {
     test("renders three recommendations without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeRecommendations);
+        axiosMock.onGet("/api/Recommendation/all").reply(200, recommendationsFixtures.threeRecommendations);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -103,7 +103,7 @@ describe("RecommendationsIndexPage tests", () => {
     test("renders three recommendations without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").reply(200, recommendationsFixtures.threeRecommendations);
+        axiosMock.onGet("/api/Recommendation/all").reply(200, recommendationsFixtures.threeRecommendations);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -123,7 +123,7 @@ describe("RecommendationsIndexPage tests", () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendations/all").timeout();
+        axiosMock.onGet("/api/Recommendation/all").timeout();
 
         const { queryByTestId, getByText } = render(
             <QueryClientProvider client={queryClient}>
