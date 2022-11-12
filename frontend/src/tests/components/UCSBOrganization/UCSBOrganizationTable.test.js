@@ -86,5 +86,9 @@ describe("UCSBOrganizationTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("CRANE");
     expect(getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Physics Innovation Technology");
     expect(getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("College Rage");
+    
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
   });
 });

@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
@@ -71,6 +71,7 @@ describe("UCSBOrganizationIndexPage tests", () => {
             </QueryClientProvider>
         );
 
+
     });
 
     test("renders three without crashing for regular user", async () => {
@@ -132,6 +133,36 @@ describe("UCSBOrganizationIndexPage tests", () => {
 
         expect(queryByTestId(`${testId}-cell-row-0-col-orgCode`)).not.toBeInTheDocument();
     });
+
+    test("test what happens when you click delete, admin", async () => {
+        setupAdminUser();
+
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/UCSBOrganization/all").reply(200, ucsbOrganizationFixtures.threeUCSBOrganization);
+        axiosMock.onDelete("/api/UCSBOrganization", { params : { id : "POINT" } }).reply(200, "UCSBOrganization with orgCode POINT was deleted");
+
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <UCSBOrganizationIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toBeInTheDocument(); });
+
+        expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("POINT");
+
+
+        const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+        expect(deleteButton).toBeInTheDocument();
+
+        fireEvent.click(deleteButton);
+
+        await waitFor(() => { expect(mockToast).toBeCalledWith("UCSBOrganization with orgCode POINT was deleted") });
+
+    })
 
 });
 
