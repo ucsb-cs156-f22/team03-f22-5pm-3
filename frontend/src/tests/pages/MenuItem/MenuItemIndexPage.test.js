@@ -73,23 +73,6 @@ describe("MenuItemIndexPage tests", () => {
 
     });
 
-	
-    test("renders without crashing for admin user", () => {
-        setupAdminUser();
-        const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
-
-        render(
-            <QueryClientProvider client={queryClient}>
-                <MemoryRouter>
-                    <MenuItemIndexPage />
-                </MemoryRouter>
-            </QueryClientProvider>
-        );
-
-
-    });
-
     test("renders three menu items without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
