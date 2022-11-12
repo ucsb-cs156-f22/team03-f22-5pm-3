@@ -87,6 +87,8 @@ describe("RecommendationsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
     expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("Student_B");
     expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("Student_C");
+    expect(getByTestId(`${testId}-cell-row-0-col-done`)).toHaveTextContent(false);
+    expect(getByTestId(`${testId}-cell-row-1-col-done`)).toHaveTextContent(false);
 
     // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     // expect(editButton).toBeInTheDocument();
