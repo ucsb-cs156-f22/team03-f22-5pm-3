@@ -21,10 +21,16 @@ jest.mock('react-toastify', () => {
     };
 });
 
+const mockedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: () => mockedNavigate
+}));
+
 describe("MenuItemIndexPage tests", () => {
 
-    const axiosMock =new AxiosMockAdapter(axios);
-
+    const axiosMock = new AxiosMockAdapter(axios);
     const testId = "MenuItemTable";
 
     const setupUserOnly = () => {
@@ -90,6 +96,10 @@ describe("MenuItemIndexPage tests", () => {
         expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
         expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
+		expect(getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`)).toHaveTextContent("Portola");
+        expect(getByTestId(`${testId}-cell-row-1-col-station`)).toHaveTextContent("Burrito bar");
+        expect(getByTestId(`${testId}-cell-row-2-col-name`)).toHaveTextContent("Chicken vegetable stir fry");
+
     });
 
     test("renders three menu items without crashing for admin user", async () => {
@@ -109,6 +119,10 @@ describe("MenuItemIndexPage tests", () => {
         expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
         expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
+		expect(getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`)).toHaveTextContent("Portola");
+        expect(getByTestId(`${testId}-cell-row-1-col-station`)).toHaveTextContent("Burrito bar");
+        expect(getByTestId(`${testId}-cell-row-2-col-name`)).toHaveTextContent("Chicken vegetable stir fry");
+
     });
 
     test("renders empty table when backend unavailable, user only", async () => {
@@ -119,7 +133,7 @@ describe("MenuItemIndexPage tests", () => {
 
         const restoreConsole = mockConsole();
 
-        const { queryByTestId } = render(
+        const { queryByTestId, getByText } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <MenuItemIndexPage />
@@ -129,6 +143,13 @@ describe("MenuItemIndexPage tests", () => {
 
         await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1); });
         restoreConsole();
+
+		const expectedHeaders = ['ID', 'Dining commons', 'Meal name', 'Serving station'];
+    
+        expectedHeaders.forEach((headerText) => {
+          const header = getByText(headerText);
+          expect(header).toBeInTheDocument();
+        });
 
         expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
     });
