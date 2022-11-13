@@ -3,7 +3,7 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {  onDeleteSuccess } from "main/utils/UCSBDateUtils"
 import { hasRole } from "main/utils/currentUser";
 
-
+// Stryker disable all : hard to test for query caching
 export function cellToAxiosParamsDelete(cell) {
     return {
         url: "/api/Recommendation",
@@ -13,6 +13,7 @@ export function cellToAxiosParamsDelete(cell) {
         }
     }
 }
+// Stryker enable all 
 
 
 export default function RecommendationsTable({ recommendations, currentUser }) {
@@ -63,7 +64,7 @@ export default function RecommendationsTable({ recommendations, currentUser }) {
     ];
 
     const testid = "RecommendationsTable";
-    
+    // Stryker disable all : hard to test for query caching
     const columnsIfAdmin = [
         ...columns,
         ButtonColumn("Delete", "danger", deleteCallback, testid)
