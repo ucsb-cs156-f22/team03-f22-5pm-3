@@ -23,6 +23,7 @@ import MenuItemIndexPage from "main/pages/MenuItem/MenuItemIndexPage";
 
 
 import HelpRequestsIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage";
+import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
 
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
@@ -112,6 +113,13 @@ function App() {
           )
         }
         {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/reviews/list" element={<ReviewsIndexPage />} />
+            </>
+          )
+        }
+                {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/ucsborganization/list" element={<UCSBOrganizationIndexPage />} />
