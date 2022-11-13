@@ -1,6 +1,6 @@
 import {  render } from "@testing-library/react";
-import { articlesFixtures } from "fixtures/articlesFixtures";
-import ArticlesTable from "main/components/Articles/ArticlesTable";
+import { recommendationsFixtures } from "fixtures/recommendationsFixtures";
+import RecommendationsTable from "main/components/Recommendations/RecommendationsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("ArticlesTable tests", () => {
+describe("RecommendationsTable tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <RecommendationsTable recommendations={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <RecommendationsTable recommendations={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,7 +48,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <RecommendationsTable recommendations={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -62,15 +62,16 @@ describe("ArticlesTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
+          <RecommendationsTable recommendations={recommendationsFixtures.threeRecommendations} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ['Id',  'Title', 'Url','Explanation','Email','Date Added'];
-    const expectedFields = ['id', 'title','url', 'explanation','email','dateAdded'];
-    const testId = "ArticlesTable";
+
+    const expectedHeaders = ['ID',  'Requester Email', 'Professor Email','Explanation','Date Requested','Date Needed','Done?'];
+    const expectedFields = ['id', 'requesterEmail','professorEmail', 'explanation','dateRequested','dateNeeded','done'];
+    const testId = "RecommendationsTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -82,13 +83,22 @@ describe("ArticlesTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("Midterm Elections");
-    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("Best meals from Portola");
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("Student_B");
+    expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("Student_C");
+    expect(getByTestId(`${testId}-cell-row-0-col-done`)).toHaveTextContent(false);
+    expect(getByTestId(`${testId}-cell-row-1-col-done`)).toHaveTextContent(false);
 
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-    expect(deleteButton).toHaveClass("btn-danger");
+    // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    // expect(editButton).toBeInTheDocument();
+    // expect(editButton).toHaveClass("btn-primary");
+
+    // const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    // expect(deleteButton).toBeInTheDocument();
+    // expect(deleteButton).toHaveClass("btn-danger");
+
   });
+
 });
+

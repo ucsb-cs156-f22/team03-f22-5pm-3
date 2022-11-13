@@ -1,6 +1,6 @@
 import {  render } from "@testing-library/react";
-import { articlesFixtures } from "fixtures/articlesFixtures";
-import ArticlesTable from "main/components/Articles/ArticlesTable";
+import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
+import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("ArticlesTable tests", () => {
+describe("HelpRequestsTable tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,7 +48,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -62,15 +62,16 @@ describe("ArticlesTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
+          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeHelpRequests} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ['Id',  'Title', 'Url','Explanation','Email','Date Added'];
-    const expectedFields = ['id', 'title','url', 'explanation','email','dateAdded'];
-    const testId = "ArticlesTable";
+
+    const expectedHeaders = ['Id',  'Requester Email', 'Team Id','Table or Breakout Room','Request Time','Explanation','Solved?'];
+    const expectedFields = ['id', 'requesterEmail','teamId', 'tableOrBreakoutRoom','requestTime','explanation','solved'];
+    const testId = "HelpRequestsTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -84,8 +85,13 @@ describe("ArticlesTable tests", () => {
 
     expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("Midterm Elections");
-    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("Best meals from Portola");
+    expect(getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("Need help with lab03");
+    expect(getByTestId(`${testId}-cell-row-1-col-teamId`)).toHaveTextContent("14");
+    expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("true");
+
+    // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    // expect(editButton).toBeInTheDocument();
+    // expect(editButton).toHaveClass("btn-primary");
 
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();

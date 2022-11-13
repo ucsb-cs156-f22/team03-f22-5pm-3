@@ -1,6 +1,6 @@
-import {  render } from "@testing-library/react";
-import { articlesFixtures } from "fixtures/articlesFixtures";
-import ArticlesTable from "main/components/Articles/ArticlesTable";
+import { render } from "@testing-library/react";
+import { menuItemFixtures } from "fixtures/menuItemFixtures";
+import MenuItemTable from "main/components/MenuItem/MenuItemTable"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("ArticlesTable tests", () => {
+describe("MenuItem tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <MenuItemTable menuItems={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <MenuItemTable menuItems={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,29 +48,29 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <MenuItemTable menuItems={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
   });
 
-  test("Has the expected column headers and content for adminUser", () => {
+  test("Has the expected colum headers and content for adminUser", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
+          <MenuItemTable menuItems={menuItemFixtures.threeMenuItems} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ['Id',  'Title', 'Url','Explanation','Email','Date Added'];
-    const expectedFields = ['id', 'title','url', 'explanation','email','dateAdded'];
-    const testId = "ArticlesTable";
+    const expectedHeaders = ["id", "Dining commons", "Meal name", "Serving station"];
+    const expectedFields = ["id", "diningCommonsCode", "name", "station"];
+    const testId = "MenuItemTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -82,13 +82,9 @@ describe("ArticlesTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("Midterm Elections");
-    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("Best meals from Portola");
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-    expect(deleteButton).toHaveClass("btn-danger");
   });
+
 });

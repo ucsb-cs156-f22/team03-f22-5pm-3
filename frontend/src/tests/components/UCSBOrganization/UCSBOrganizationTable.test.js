@@ -1,6 +1,6 @@
-import {  render } from "@testing-library/react";
-import { articlesFixtures } from "fixtures/articlesFixtures";
-import ArticlesTable from "main/components/Articles/ArticlesTable";
+import { render } from "@testing-library/react";
+import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
+import UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("ArticlesTable tests", () => {
+describe("UCSBOrganizationTable tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,7 +48,7 @@ describe("ArticlesTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -62,15 +62,15 @@ describe("ArticlesTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={ucsbOrganizationFixtures.threeUCSBOrganization} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ['Id',  'Title', 'Url','Explanation','Email','Date Added'];
-    const expectedFields = ['id', 'title','url', 'explanation','email','dateAdded'];
-    const testId = "ArticlesTable";
+    const expectedHeaders = ['UCSB Organization Code', 'UCSB Organization Short Translation', 'UCSB Organization Translation', 'UCSB Organization is Inactive'];
+    const expectedFields = ['orgCode', 'orgTranslationShort', 'orgTranslation', 'inactive'];
+    const testId = "UCSBOrganizationTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -82,11 +82,11 @@ describe("ArticlesTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("Midterm Elections");
-    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("Best meals from Portola");
-
+    expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("POINT");
+    expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("CRANE");
+    expect(getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Physics Innovation Technology");
+    expect(getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("College Rage");
+    
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");

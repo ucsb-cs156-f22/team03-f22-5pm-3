@@ -1,11 +1,12 @@
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
-import { onDeleteSuccess } from "main/utils/UCSBDateUtils"
+import {  onDeleteSuccess } from "main/utils/UCSBDateUtils"
 import { hasRole } from "main/utils/currentUser";
+
 
 export function cellToAxiosParamsDelete(cell) {
     return {
-        url: "/api/article",
+        url: "/api/HelpRequest",
         method: "DELETE",
         params: {
             id: cell.row.values.id
@@ -13,13 +14,13 @@ export function cellToAxiosParamsDelete(cell) {
     }
 }
 
-export default function ArticlesTable({ articles, currentUser }) {
+export default function HelpRequestsTable({ helpRequests, currentUser }) {
 
-    // Stryker disable all : hard to test for query caching
-    const deleteMutation = useBackendMutation(
+     // Stryker disable all : hard to test for query caching
+     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/article/all"]
+        ["/api/HelpRequest/all"]
     );
     // Stryker enable all 
 
@@ -32,39 +33,43 @@ export default function ArticlesTable({ articles, currentUser }) {
             accessor: 'id', // accessor is the "key" in the data
         },
         {
-            Header: 'Title',
-            accessor: 'title',
+            Header: 'Requester Email',
+            accessor: 'requesterEmail',
         },
         {
-            Header: 'Url',
-            accessor: 'url',
+            Header: 'Team Id',
+            accessor: 'teamId',
+        },
+        {
+            Header: 'Table or Breakout Room',
+            accessor: 'tableOrBreakoutRoom',
+        },
+        {
+            Header: 'Request Time',
+            accessor: 'requestTime',
         },
         {
             Header: 'Explanation',
             accessor: 'explanation',
         },
         {
-            Header: 'Email',
-            accessor: 'email',
-        },
-        {
-            Header: 'Date Added',
-            accessor: 'dateAdded',
+            Header: 'Solved?',
+            id: 'solved',
+            accessor: (row, _rowIndex) => String(row.solved)
         }
     ];
 
-    const testId = "ArticlesTable";
-
     const columnsIfAdmin = [
         ...columns,
-        ButtonColumn("Delete", "danger", deleteCallback, testId)
+        // ButtonColumn("Edit", "primary", editCallback, "HelpRequestsTable"),
+        ButtonColumn("Delete", "danger", deleteCallback, "HelpRequestsTable")
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
     return <OurTable
-        data={articles}
+        data={helpRequests}
         columns={columnsToDisplay}
-        testid={testId}
+        testid={"HelpRequestsTable"}
     />;
 };

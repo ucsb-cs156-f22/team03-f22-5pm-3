@@ -1,8 +1,6 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import DiningCommonsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
-
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -184,5 +182,3 @@ describe("UCSBDatesIndexPage tests", () => {
 
 
 });
-
-
