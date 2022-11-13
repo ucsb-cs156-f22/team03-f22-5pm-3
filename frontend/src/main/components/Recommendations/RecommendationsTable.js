@@ -9,11 +9,10 @@ export function cellToAxiosParamsDelete(cell) {
         url: "/api/Recommendation",
         method: "DELETE",
         params: {
-            code: cell.row.values.code
+            id: cell.row.values.id
         }
     }
 }
- 
 
 
 export default function RecommendationsTable({ recommendations, currentUser }) {
