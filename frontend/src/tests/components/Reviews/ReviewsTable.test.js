@@ -54,7 +54,7 @@ describe("ReviewsTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DiningCommonsTable reviews={reviewsFixtures.threeReviews} currentUser={currentUser} />
+          <ReviewsTable reviews={reviewsFixtures.threeReviews} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
