@@ -80,6 +80,11 @@ describe("ReviewsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
     expect(getByTestId(`${testId}-cell-row-0-col-stars`)).toHaveTextContent(4);
     expect(getByTestId(`${testId}-cell-row-1-col-stars`)).toHaveTextContent(3);
+    
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
+
   });
 
 });
