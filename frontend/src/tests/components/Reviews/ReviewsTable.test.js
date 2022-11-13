@@ -1,6 +1,5 @@
 import {render } from "@testing-library/react";
 import {reviewsFixtures } from "fixtures/reviewsFixtures";
-import DiningCommonsTable from "main/components/Reviews/ReviewsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
