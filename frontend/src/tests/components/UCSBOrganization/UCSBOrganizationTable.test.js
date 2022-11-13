@@ -1,6 +1,6 @@
-import {  render } from "@testing-library/react";
-import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
-import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
+import { render } from "@testing-library/react";
+import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
+import UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("HelpRequestsTable tests", () => {
+describe("UCSBOrganizationTable tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,7 +48,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -62,16 +62,15 @@ describe("HelpRequestsTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeHelpRequests} currentUser={currentUser} />
+          <UCSBOrganizationTable ucsborganization={ucsbOrganizationFixtures.threeUCSBOrganization} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-
-    const expectedHeaders = ['Id',  'Requester Email', 'Team Id','Table or Breakout Room','Request Time','Explanation','Solved?'];
-    const expectedFields = ['id', 'requesterEmail','teamId', 'tableOrBreakoutRoom','requestTime','explanation','solved'];
-    const testId = "HelpRequestsTable";
+    const expectedHeaders = ['UCSB Organization Code', 'UCSB Organization Short Translation', 'UCSB Organization Translation', 'UCSB Organization is Inactive'];
+    const expectedFields = ['orgCode', 'orgTranslationShort', 'orgTranslation', 'inactive'];
+    const testId = "UCSBOrganizationTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -83,16 +82,11 @@ describe("HelpRequestsTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-    expect(getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("Need help with lab03");
-    expect(getByTestId(`${testId}-cell-row-1-col-teamId`)).toHaveTextContent("14");
-    expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("true");
-
-    // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    // expect(editButton).toBeInTheDocument();
-    // expect(editButton).toHaveClass("btn-primary");
-
+    expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("POINT");
+    expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("CRANE");
+    expect(getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Physics Innovation Technology");
+    expect(getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("College Rage");
+    
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");

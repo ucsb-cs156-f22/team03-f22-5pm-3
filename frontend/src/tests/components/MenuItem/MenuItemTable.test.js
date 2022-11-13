@@ -1,6 +1,6 @@
-import {  render } from "@testing-library/react";
-import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
-import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
+import { render } from "@testing-library/react";
+import { menuItemFixtures } from "fixtures/menuItemFixtures";
+import MenuItemTable from "main/components/MenuItem/MenuItemTable"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("HelpRequestsTable tests", () => {
+describe("MenuItem tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <MenuItemTable menuItems={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <MenuItemTable menuItems={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,30 +48,29 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <MenuItemTable menuItems={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
   });
 
-  test("Has the expected column headers and content for adminUser", () => {
+  test("Has the expected colum headers and content for adminUser", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeHelpRequests} currentUser={currentUser} />
+          <MenuItemTable menuItems={menuItemFixtures.threeMenuItems} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-
-    const expectedHeaders = ['Id',  'Requester Email', 'Team Id','Table or Breakout Room','Request Time','Explanation','Solved?'];
-    const expectedFields = ['id', 'requesterEmail','teamId', 'tableOrBreakoutRoom','requestTime','explanation','solved'];
-    const testId = "HelpRequestsTable";
+    const expectedHeaders = ["id", "Dining commons", "Meal name", "Serving station"];
+    const expectedFields = ["id", "diningCommonsCode", "name", "station"];
+    const testId = "MenuItemTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -83,18 +82,9 @@ describe("HelpRequestsTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-    expect(getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("Need help with lab03");
-    expect(getByTestId(`${testId}-cell-row-1-col-teamId`)).toHaveTextContent("14");
-    expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("true");
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
-    // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    // expect(editButton).toBeInTheDocument();
-    // expect(editButton).toHaveClass("btn-primary");
-
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-    expect(deleteButton).toHaveClass("btn-danger");
   });
+
 });

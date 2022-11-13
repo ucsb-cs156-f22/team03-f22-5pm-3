@@ -1,6 +1,6 @@
 import {  render } from "@testing-library/react";
-import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
-import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
+import { recommendationsFixtures } from "fixtures/recommendationsFixtures";
+import RecommendationsTable from "main/components/Recommendations/RecommendationsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("HelpRequestsTable tests", () => {
+describe("RecommendationsTable tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <RecommendationsTable recommendations={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <RecommendationsTable recommendations={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,7 +48,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <RecommendationsTable recommendations={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -62,16 +62,16 @@ describe("HelpRequestsTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeHelpRequests} currentUser={currentUser} />
+          <RecommendationsTable recommendations={recommendationsFixtures.threeRecommendations} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
 
-    const expectedHeaders = ['Id',  'Requester Email', 'Team Id','Table or Breakout Room','Request Time','Explanation','Solved?'];
-    const expectedFields = ['id', 'requesterEmail','teamId', 'tableOrBreakoutRoom','requestTime','explanation','solved'];
-    const testId = "HelpRequestsTable";
+    const expectedHeaders = ['ID',  'Requester Email', 'Professor Email','Explanation','Date Requested','Date Needed','Done?'];
+    const expectedFields = ['id', 'requesterEmail','professorEmail', 'explanation','dateRequested','dateNeeded','done'];
+    const testId = "RecommendationsTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -83,18 +83,22 @@ describe("HelpRequestsTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(1);
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(2);
-    expect(getByTestId(`${testId}-cell-row-0-col-explanation`)).toHaveTextContent("Need help with lab03");
-    expect(getByTestId(`${testId}-cell-row-1-col-teamId`)).toHaveTextContent("14");
-    expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("true");
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("Student_B");
+    expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("Student_C");
+    expect(getByTestId(`${testId}-cell-row-0-col-done`)).toHaveTextContent(false);
+    expect(getByTestId(`${testId}-cell-row-1-col-done`)).toHaveTextContent(false);
 
     // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     // expect(editButton).toBeInTheDocument();
     // expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-    expect(deleteButton).toHaveClass("btn-danger");
+    // const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    // expect(deleteButton).toBeInTheDocument();
+    // expect(deleteButton).toHaveClass("btn-danger");
+
   });
+
 });
+

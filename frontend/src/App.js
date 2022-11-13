@@ -17,6 +17,8 @@ import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 
 
+
+import RecommendationsIndexPage from "main/pages/Recommendations/RecommendationsIndexPage";
 import MenuItemIndexPage from "main/pages/MenuItem/MenuItemIndexPage";
 
 
@@ -49,6 +51,13 @@ function App() {
               <Route exact path="/todos/list" element={<TodosIndexPage />} />
               <Route exact path="/todos/create" element={<TodosCreatePage />} />
               <Route exact path="/todos/edit/:todoId" element={<TodosEditPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/recommendations/list" element={<RecommendationsIndexPage />} />
             </>
           )
         }
@@ -110,6 +119,7 @@ function App() {
             </>
           )
         }
+
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
