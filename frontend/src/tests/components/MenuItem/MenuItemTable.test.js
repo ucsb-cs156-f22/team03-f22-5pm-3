@@ -68,6 +68,7 @@ describe("MenuItem tests", () => {
 
     );
 
+
     const expectedHeaders = ["ID", "Dining commons", "Meal name", "Serving station"];
     const expectedFields = ["id", "diningCommonsCode", "name", "station"];
     const testId = "MenuItemTable";
@@ -84,6 +85,12 @@ describe("MenuItem tests", () => {
 
     expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cheese burger");
+    expect(getByTestId(`${testId}-cell-row-2-col-diningCommonsCode`)).toHaveTextContent("Carrillo");
+
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
 
   });
 
