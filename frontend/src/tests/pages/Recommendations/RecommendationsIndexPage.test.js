@@ -149,7 +149,7 @@ describe("RecommendationsIndexPage tests", () => {
         setupAdminUser();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/Recomendation/all").reply(200, recommendationsFixtures.threeRecommendations);
+        axiosMock.onGet("/api/Recommendation/all").reply(200, recommendationsFixtures.threeRecommendations);
         axiosMock.onDelete("/api/Recommendation", {params: {id: "1"}}).reply(200, "Recommendation with id 1 was deleted");
 
 
