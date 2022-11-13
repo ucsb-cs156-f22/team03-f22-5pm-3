@@ -55,7 +55,7 @@ describe("MenuItem tests", () => {
     );
   });
 
-  test("Has the expected colum headers and content for adminUser", () => {
+  test("Has the expected column headers and content for adminUser", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
@@ -68,7 +68,7 @@ describe("MenuItem tests", () => {
 
     );
 
-    const expectedHeaders = ["id", "Dining commons", "Meal name", "Serving station"];
+    const expectedHeaders = ["ID", "Dining commons", "Meal name", "Serving station"];
     const expectedFields = ["id", "diningCommonsCode", "name", "station"];
     const testId = "MenuItemTable";
 

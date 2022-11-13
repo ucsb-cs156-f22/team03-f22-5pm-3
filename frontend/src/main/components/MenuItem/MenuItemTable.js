@@ -1,10 +1,11 @@
 import OurTable from "main/components/OurTable";
+import { _hasRole } from "main/utils/currentUser"
 
 export default function MenuItemTable({ menuItems, _currentUser }) {
 
     const columns = [
         {
-            Header: 'id',
+            Header: 'ID',
             accessor: 'id', // accessor is the "key" in the data
         },
         {
