@@ -1,32 +1,31 @@
-import OurTable from "main/components/OurTable";
-// import { useBackendMutation } from "main/utils/useBackend";
-// import {onDeleteSuccess } from "main/utils/UCSBDateUtils"
+import OurTable, {ButtonColumn} from "main/components/OurTable";
+import { useBackendMutation } from "main/utils/useBackend";
+import {onDeleteSuccess } from "main/utils/UCSBDateUtils"
+import { hasRole } from "main/utils/currentUser";
 
-//import { hasRole } from "main/utils/currentUser";
+export function cellToAxiosParamsDelete(cell) {
+    return {
+        url: "/api/menuitemreviews",
+        method: "DELETE",
+        params: {
+            id: cell.row.values.id
+        }
+    }
+}
 
-// export function cellToAxiosParamsDelete(cell) {
-//     return {
-//         url: "/api/menuitemreviews",
-//         method: "DELETE",
-//         params: {
-//             id: cell.row.values.id
-//         }
-//     }
-// }
-
-export default function ReviewsTable({ reviews, _currentUser }) {
+export default function ReviewsTable({ reviews, currentUser }) {
 
 
     // Stryker disable all : hard to test for query caching
-    // const deleteMutation = useBackendMutation(
-    //     cellToAxiosParamsDelete,
-    //     { onSuccess: onDeleteSuccess },
-    //     ["/api/menuitemreviews/all"]
-    // );
+    const deleteMutation = useBackendMutation(
+        cellToAxiosParamsDelete,
+        { onSuccess: onDeleteSuccess },
+        ["/api/menuitemreviews/all"]
+    );
     // Stryker enable all 
 
     // Stryker disable next-line all : TODO try to make a good test for this
-    // const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
+    const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
 
     const columns = [
         {
@@ -55,16 +54,16 @@ export default function ReviewsTable({ reviews, _currentUser }) {
             accessor: 'comments',
         }
     ];
-    // const columnsIfAdmin = [
-    //     ...columns,
-    //     ButtonColumn("Delete", "danger", deleteCallback, "ReviewsTable")
-    // ];
+    const columnsIfAdmin = [
+        ...columns,
+        ButtonColumn("Delete", "danger", deleteCallback, "ReviewsTable")
+    ];
 
-    // const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
+    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
     return <OurTable
         data={reviews}
-        columns={columns}
+        columns={columnsToDisplay}
         testid={"ReviewsTable"}
     />;
 };
