@@ -1,6 +1,7 @@
 import {  render } from "@testing-library/react";
 import { recommendationsFixtures } from "fixtures/recommendationsFixtures";
 import RecommendationsTable from "main/components/Recommendations/RecommendationsTable";
+// import cellToAxiosParamsDelete from "main/components/Recommendations/RecommendationsTable"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -90,13 +91,10 @@ describe("RecommendationsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-0-col-done`)).toHaveTextContent(false);
     expect(getByTestId(`${testId}-cell-row-1-col-done`)).toHaveTextContent(false);
 
-    // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    // expect(editButton).toBeInTheDocument();
-    // expect(editButton).toHaveClass("btn-primary");
 
-    // const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    // expect(deleteButton).toBeInTheDocument();
-    // expect(deleteButton).toHaveClass("btn-danger");
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
 
   });
 
